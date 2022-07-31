@@ -1,0 +1,6 @@
+title: Molstar support
+author: Jannik Buhr
+version: 0.0.1
+contributes:
+  shortcodes:
+    - molstar.lua
