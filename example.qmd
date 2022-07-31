@@ -1,0 +1,10 @@
+---
+title: Molstar example
+format: html
+---
+
+This example shows the three shortcodes in action, starting with `rcsb-pdb`:
+
+{{< rcsb 7sgl >}} 
+
+
