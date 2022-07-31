@@ -43,4 +43,37 @@ Load a topology and a trajectory with:
 
 {{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
+## Customization
+
+### Molstar options
+
+The first argument (plus the second for `mol-traj`) is a positional argument.
+After this you can pass keyword arguments, which will be merged with defaults and passed on to `molstar.Viewer.create`.
+For example, if you don't have an animation you might want to hide the animation button and open the right options panel on load:
+
+`{{{< mol-rcsb 7sgl viewportShowAnimation=false layoutShowLeftPanel=false layoutShowControls=true >}}}`
+
+There is a list of available options in the molstar source code: [here](https://github.com/molstar/molstar/blob/33963c085a79e5eec64160b64c5d6ff3782b477b/src/apps/viewer/app.ts#L72-L103).
+
+### CSS
+
+Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don't embed the same thing twice, it will only show up once). So the first app on this page will respond to css for `#app-7sgl`.
+
+All apps have the class `molstar-app` and the following css is included by default:
+
+```css
+.molstar-app {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+```
+
+For example, I might want to make one app in a presentation a bit shorter because there is text above it:
+
+```css
+#app-7sgl {
+  padding-bottom: 40%;
+}
+```
 
