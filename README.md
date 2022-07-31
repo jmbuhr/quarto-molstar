@@ -16,29 +16,8 @@ If you're using version control, you will want to check in this directory.
 
 ## Using
 
-To embed a protein straight from RCSB PDB, use the `{{< rcsb-pdb >}}` shortcode. For example:
-
-```default
-{{< rcsb 7sgl >}} 
-```
-
-will embed this protein: <https://www.rcsb.org/3d-view/7SGL> (there is no special meaning to this example; it was the molecule of the day when this README was written).
-
-{{< mol-rcsb 7sgl >}} 
-
-Get a local pdb file (or file from a url) with:
-
-{{< mol-url ./path-to-protein.pdb >}} 
-
-{{< mol-url https://files.rcsb.org/download/7sgl.pdb >}} 
-
-Get a local xyz file with:
-
-{{< mol-url ./example.xyz >}} 
-
-Or a trajectory with:
-
-{{< mol-traj example.pdb example.xtc >}}
+Usage examples are in `index.qmd`, which you can see rendered locally and served with GitHub pages here: 
+<https://jmbuhr.de/quarto-molstar/>
 
 ## Update (extension developement)
 
