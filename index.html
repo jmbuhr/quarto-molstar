@@ -57,126 +57,86 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>This example shows the three shortcodes in action, starting with <code>rcsb-pdb</code>:</p>
+<section id="rcsb-pdb" class="level2">
+<h2 class="anchored" data-anchor-id="rcsb-pdb">RCSB PDB</h2>
+<p>Get a protein from the RCSB PDB with:</p>
+<p><code>{{&lt; mol-rcsb 7sgl &gt;}}</code></p>
 <div id="app-7sgl" class="molstar-app">
 
 </div>
          <script type="text/javascript">
-          molstar.Viewer.create('app-7sgl', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadPdb('7sgl');
+          molstar.Viewer.create('app-7sgl', {"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowExpand":true,"emdbProvider":"rcsb","layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowSequence":false,"pdbProvider":"rcsb","layoutShowLog":false}).then(viewer => {
+            viewer.loadPdb('7sgl');
           });
           </script>
           
+</section>
+<section id="local-pdb-file" class="level2">
+<h2 class="anchored" data-anchor-id="local-pdb-file">Local pdb file</h2>
 <p>Get a local pdb file with:</p>
+<p><code>{{&lt; mol-url ./www/7sgl.pdb &gt;}}</code></p>
 <div id="app-./www/7sgl.pdb" class="molstar-app">
 
 </div>
          <script type="text/javascript">
-          molstar.Viewer.create('app-./www/7sgl.pdb', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadStructureFromUrl('./www/7sgl.pdb', format='pdb');
+          molstar.Viewer.create('app-./www/7sgl.pdb', {"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowExpand":true,"emdbProvider":"rcsb","layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowSequence":false,"pdbProvider":"rcsb","layoutShowLog":false}).then(viewer => {
+            viewer.loadStructureFromUrl('./www/7sgl.pdb', format='pdb');
           });
           </script>
           
+</section>
+<section id="pdb-file-from-url" class="level2">
+<h2 class="anchored" data-anchor-id="pdb-file-from-url">pdb file from url</h2>
 <p>Get a pdb file from a url:</p>
+<p><code>{{&lt; mol-url https://files.rcsb.org/download/7sgl.pdb &gt;}}</code></p>
 <div id="app-https://files.rcsb.org/download/7sgl.pdb" class="molstar-app">
 
 </div>
          <script type="text/javascript">
-          molstar.Viewer.create('app-https://files.rcsb.org/download/7sgl.pdb', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadStructureFromUrl('https://files.rcsb.org/download/7sgl.pdb', format='pdb');
+          molstar.Viewer.create('app-https://files.rcsb.org/download/7sgl.pdb', {"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowExpand":true,"emdbProvider":"rcsb","layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowSequence":false,"pdbProvider":"rcsb","layoutShowLog":false}).then(viewer => {
+            viewer.loadStructureFromUrl('https://files.rcsb.org/download/7sgl.pdb', format='pdb');
           });
           </script>
           
+</section>
+<section id="local-xyz-file" class="level2">
+<h2 class="anchored" data-anchor-id="local-xyz-file">local xyz file</h2>
 <p>Get a local xyz file with:</p>
+<p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
 <div id="app-./www/example.xyz" class="molstar-app">
 
 </div>
          <script type="text/javascript">
-          molstar.Viewer.create('app-./www/example.xyz', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadStructureFromUrl('./www/example.xyz', format='xyz');
+          molstar.Viewer.create('app-./www/example.xyz', {"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowExpand":true,"emdbProvider":"rcsb","layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowSequence":false,"pdbProvider":"rcsb","layoutShowLog":false}).then(viewer => {
+            viewer.loadStructureFromUrl('./www/example.xyz', format='xyz');
           });
           </script>
           
-<p>Or a trajectory with:</p>
+</section>
+<section id="local-pdb-and-trajectory" class="level2">
+<h2 class="anchored" data-anchor-id="local-pdb-and-trajectory">local pdb and trajectory</h2>
+<p>Load a topology and a trajectory with:</p>
+<p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
 <div id="app-./www/example.pdb./www/example.xtc" class="molstar-app">
 
 </div>
          <script type="text/javascript">
-          molstar.Viewer.create('app-./www/example.pdb./www/example.xtc', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadTrajectory(
-          {
-            model: {
-              kind: 'model-url', url: './www/example.pdb', format: 'pdb'
-            },
-            coordinates: {
-              kind: 'coordinates-url', url: './www/example.xtc',
-              format: 'xtc', isBinary: true
+          molstar.Viewer.create('app-./www/example.pdb./www/example.xtc', {"viewportShowAnimation":true,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowExpand":true,"emdbProvider":"rcsb","layoutIsExpanded":false,"layoutShowRemoteState":false,"viewportShowSelectionMode":false,"layoutShowSequence":false,"pdbProvider":"rcsb","layoutShowLog":false}).then(viewer => {
+            viewer.loadTrajectory(
+            {
+              model: {
+                kind: 'model-url', url: './www/example.pdb', format: 'pdb'
+              },
+              coordinates: {
+                kind: 'coordinates-url', url: './www/example.xtc',
+                format: 'xtc', isBinary: true
+              }
             }
-          }
-          );
+            );
           });
           </script>
           
+</section>
 
 </main>
 <!-- /main column -->

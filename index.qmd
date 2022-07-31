@@ -3,23 +3,43 @@ title: Molstar example
 format: html
 ---
 
-This example shows the three shortcodes in action, starting with `rcsb-pdb`:
+## RCSB PDB
 
-{{< mol-rcsb 7sgl >}} 
+Get a protein from the RCSB PDB with:
+
+`{{{< mol-rcsb 7sgl >}}}`
+
+{{< mol-rcsb 7sgl >}}
+
+## Local pdb file
 
 Get a local pdb file with:
 
-{{< mol-url ./www/7sgl.pdb >}} 
+`{{{< mol-url ./www/7sgl.pdb >}}}`
+
+{{< mol-url ./www/7sgl.pdb >}}
+
+## pdb file from url
 
 Get a pdb file from a url:
 
-{{< mol-url https://files.rcsb.org/download/7sgl.pdb >}} 
+`{{{< mol-url https://files.rcsb.org/download/7sgl.pdb >}}}`
+
+{{< mol-url https://files.rcsb.org/download/7sgl.pdb >}}
+
+## local xyz file
 
 Get a local xyz file with:
 
+`{{{< mol-url ./www/example.xyz >}} }`
+
 {{< mol-url ./www/example.xyz >}} 
 
-Or a trajectory with:
+## local pdb and trajectory
+
+Load a topology and a trajectory with:
+
+`{{{< mol-traj ./www/example.pdb ./www/example.xtc >}}}`
 
 {{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
