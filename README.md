@@ -1,7 +1,5 @@
 # Molstar (Mol*) Extension for Quarto
 
-WIP, not ready yet :)
-
 This extension provides shortcodes for [molstar](https://github.com/molstar/molstar) in quarto.
 Molstar can display macro-molecules such as proteins as well as molcular dynamics trajectories in an interactive viewer.
 You can see it in action e.g. in the RCSB Protein Data Base: <https://www.rcsb.org/>, where it provides the 3d view for entries.
@@ -26,20 +24,21 @@ To embed a protein straight from RCSB PDB, use the `{{< rcsb-pdb >}}` shortcode.
 
 will embed this protein: <https://www.rcsb.org/3d-view/7SGL> (there is no special meaning to this example; it was the molecule of the day when this README was written).
 
-To embed a local pdb, use:
+{{< mol-rcsb 7sgl >}} 
 
-```default
-{{< pdb ./path-to-prot.pdb >}} 
-```
+Get a local pdb file (or file from a url) with:
 
-To embed a whole trajectory, use:
+{{< mol-url ./path-to-protein.pdb >}} 
 
-```default
-{{< traj ./path-to-topoloy.gro ./path-to-trajectory.xtc >}} 
-```
+{{< mol-url https://files.rcsb.org/download/7sgl.pdb >}} 
 
-Note that embedding complete trajectories can result in large file sizes and high memory usage.
+Get a local xyz file with:
 
+{{< mol-url ./example.xyz >}} 
+
+Or a trajectory with:
+
+{{< mol-traj example.pdb example.xtc >}}
 
 ## Update (extension developement)
 
