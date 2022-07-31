@@ -21,7 +21,7 @@ If you're using version control, you will want to check in this directory.
 To embed a protein straight from RCSB PDB, use the `{{< rcsb-pdb >}}` shortcode. For example:
 
 ```default
-{{< rcsb-pdb 7sgl >}} 
+{{< rcsb 7sgl >}} 
 ```
 
 will embed this protein: <https://www.rcsb.org/3d-view/7SGL> (there is no special meaning to this example; it was the molecule of the day when this README was written).
@@ -41,4 +41,12 @@ To embed a whole trajectory, use:
 Note that embedding complete trajectories can result in large file sizes and high memory usage.
 
 
+## Update (extension developement)
+
+The self-contained js and css files where downloaded from the [molstar web viewer](https://molstar.org/viewer/) in order to be up to date but also self-contained and functional without an internet connection. 
+
+```bash
+wget https://molstar.org/viewer/molstar.js
+wget https://molstar.org/viewer/molstar.css
+```
 
