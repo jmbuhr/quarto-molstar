@@ -9,7 +9,7 @@ This example shows the three shortcodes in action, starting with `rcsb-pdb`:
 
 Get a local pdb file with:
 
-{{< mol-url ./7sgl.pdb >}} 
+{{< mol-url ./www/7sgl.pdb >}} 
 
 Get a pdb file from a url:
 
@@ -17,10 +17,10 @@ Get a pdb file from a url:
 
 Get a local xyz file with:
 
-{{< mol-url ./example.xyz >}} 
+{{< mol-url ./www/example.xyz >}} 
 
 Or a trajectory with:
 
-{{< mol-traj example.pdb example.xtc >}}
+{{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
 
