@@ -15,91 +15,79 @@ local function addDependencies()
   }
 end
 
-local function rcsbViewer(appId, pdbId)
-  local subs = { app = appId, pdb = pdbId }
+local function mergeMolstarOptions (userOptions)
+  local defaultArgs = {
+      layoutIsExpanded= false,
+      layoutShowControls= false,
+      layoutShowRemoteState= false,
+      layoutShowSequence= false,
+      layoutShowLog= false,
+      layoutShowLeftPanel= true,
+      viewportShowExpand= true,
+      viewportShowSelectionMode= false,
+      viewportShowAnimation= true,
+      pdbProvider= "rcsb",
+      emdbProvider= "rcsb",
+  }
+  if userOptions == nil then
+    return quarto.json.encode(defaultArgs)
+  end
+  for k,v in pairs(userOptions) do
+    defaultArgs[k] = v
+  end
+  return quarto.json.encode(defaultArgs)
+end
+
+local function rcsbViewer(appId, pdbId, userOptions)
+  local subs = { app = appId, pdb = pdbId, options = mergeMolstarOptions(userOptions) }
   return f([[
          <script type="text/javascript">
-          molstar.Viewer.create('${app}', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadPdb('${pdb}');
+          molstar.Viewer.create('${app}', ${options}).then(viewer => {
+            viewer.loadPdb('${pdb}');
           });
           </script>
           ]], subs)
 end
 
-local function urlViewer(appId, topPath)
+local function urlViewer(appId, topPath, userOptions)
   local subs = {
     app = appId,
     top = topPath,
     topExt = fileExt(topPath),
+    options = mergeMolstarOptions(molstarOptions)
   }
   return f([[
          <script type="text/javascript">
-          molstar.Viewer.create('${app}', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadStructureFromUrl('${top}', format='${topExt}');
+          molstar.Viewer.create('${app}', ${options}).then(viewer => {
+            viewer.loadStructureFromUrl('${top}', format='${topExt}');
           });
           </script>
           ]], subs)
 end
 
-local function trajViewer(appId, topPath, trajPath)
+local function trajViewer(appId, topPath, trajPath, userOptions)
   local subs = {
     app     = appId,
-    pdb     = pdbPath,
     top     = topPath,
     topExt  = fileExt(topPath),
     traj    = trajPath,
     trajExt = fileExt(trajPath),
+    options = mergeMolstarOptions(molstarOptions)
   }
   return f([[
          <script type="text/javascript">
-          molstar.Viewer.create('${app}', {
-                layoutIsExpanded: false,
-                layoutShowControls: false,
-                layoutShowRemoteState: false,
-                layoutShowSequence: false,
-                layoutShowLog: false,
-                layoutShowLeftPanel: true,
-                viewportShowExpand: true,
-                viewportShowSelectionMode: false,
-                viewportShowAnimation: true,
-                pdbProvider: "rcsb",
-                emdbProvider: "rcsb",
-          }).then(viewer => {
-          viewer.loadTrajectory(
-          {
-            model: {
-              kind: 'model-url', url: '${top}', format: '${topExt}'
-            },
-            coordinates: {
-              kind: 'coordinates-url', url: '${traj}',
-              format: '${trajExt}', isBinary: true
+          molstar.Viewer.create('${app}', ${options}).then(viewer => {
+            viewer.loadTrajectory(
+            {
+              model: {
+                kind: 'model-url', url: '${top}', format: '${topExt}'
+              },
+              coordinates: {
+                kind: 'coordinates-url', url: '${traj}',
+                format: '${trajExt}', isBinary: true
+              }
             }
-          }
-          );
+            );
           });
           </script>
           ]], subs)
@@ -118,13 +106,22 @@ return {
     local pdbId = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. pdbId
 
+    userOptions = {}
+    for k,v in pairs(kwargs) do
+      value = pandoc.utils.stringify(v)
+      if value == 'true' then value = true end
+      if value == 'false' then value = false end
+      userOptions[k] = value
+    end
+    quarto.utils.dump(userOptions)
+
     -- create molstar app div and js
     return {
       pandoc.Div(
         {},
         { id = appId, class = 'molstar-app' }
       ),
-      pandoc.RawBlock('html', rcsbViewer(appId, pdbId))
+      pandoc.RawBlock('html', rcsbViewer(appId, pdbId, userOptions))
     }
   end,
   ['mol-url'] = function(args, kwargs)
@@ -144,7 +141,7 @@ return {
         {},
         { id = appId, class = 'molstar-app' }
       ),
-      pandoc.RawBlock('html', urlViewer(appId, pdbPath))
+      pandoc.RawBlock('html', urlViewer(appId, pdbPath, kwargs))
     }
   end,
   ['mol-traj'] = function(args, kwargs)
@@ -165,7 +162,7 @@ return {
         {},
         { id = appId, class = 'molstar-app' }
       ),
-      pandoc.RawBlock('html', trajViewer(appId, topPath, trajPath))
+      pandoc.RawBlock('html', trajViewer(appId, topPath, trajPath, kwargs))
     }
   end,
 }
