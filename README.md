@@ -19,6 +19,9 @@ If you're using version control, you will want to check in this directory.
 Usage examples are in `index.qmd`, which you can see rendered locally and served with GitHub pages here: 
 <https://jmbuhr.de/quarto-molstar/>
 
+Likewise, the example rendered as a revealjs presentation (`presentation.qmd`) is served here:
+<https://jmbuhr.de/quarto-molstar/presentation.html>
+
 ## Limitations
 
 - No self-contained htmls: Molstar viewers for local files are empty when the file is **not** served by a webserver such as `quarto preview` or GitHub pages.
@@ -28,8 +31,7 @@ The reason for this is the [Same-origin Policy](https://developer.mozilla.org/en
 It and similar policies prevent that one document can access resources it is not supposed to access.
 For example, an html document you downloaded is not allowed to execute code that reads personal files on your computer.
 This also prevents it from loading your molecules from local paths.
-
-- There is a small bug with revealjs presentations: https://github.com/jmbuhr/quarto-molstar/issues/1
+- revealjs presentations now use iframes instead of a normal div to work around https://github.com/jmbuhr/quarto-molstar/issues/1, which is why you might have to address those differently for custom styling if you plan to use the same source for html and reveal output.
 
 ## Update Mol* (extension developement)
 
