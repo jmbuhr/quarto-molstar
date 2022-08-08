@@ -33,7 +33,7 @@ local function mergeMolstarOptions(userOptions)
     pdbProvider = "rcsb",
     emdbProvider = "rcsb",
   }
-  if kwargs == nil then
+  if userOptions == nil then
     return quarto.json.encode(defaultOptions)
   end
 
@@ -41,7 +41,7 @@ local function mergeMolstarOptions(userOptions)
     value = pandoc.utils.stringify(v)
     if value == 'true' then value = true end
     if value == 'false' then value = false end
-    defaultArgs[k] = value
+    defaultOptions[k] = value
   end
 
   return quarto.json.encode(defaultOptions)
