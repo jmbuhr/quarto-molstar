@@ -87,7 +87,7 @@ local function urlViewer(appId, topPath, userOptions)
     appId = appId,
     top = topPath,
     topExt = fileExt(topPath),
-    options = mergeMolstarOptions(molstarOptions)
+    options = mergeMolstarOptions(userOptions)
   }
   return f([[
          <script type="text/javascript">
@@ -105,7 +105,7 @@ local function urlViewerIframe(appId, topPath, userOptions)
     top = topPath,
     frameId = frameId,
     topExt = fileExt(topPath),
-    options = mergeMolstarOptions(molstarOptions)
+    options = mergeMolstarOptions(userOptions)
   }
   return f([[
          <iframe id="${frameId}" class="molstar-app" seamless allow="fullscreen" srcdoc='
@@ -133,7 +133,7 @@ local function trajViewer(appId, topPath, trajPath, userOptions)
     topExt  = fileExt(topPath),
     traj    = trajPath,
     trajExt = fileExt(trajPath),
-    options = mergeMolstarOptions(molstarOptions)
+    options = mergeMolstarOptions(userOptions)
   }
   return f([[
          <script type="text/javascript">
@@ -163,7 +163,7 @@ local function trajViewerIframe(appId, topPath, trajPath, userOptions)
     topExt  = fileExt(topPath),
     traj    = trajPath,
     trajExt = fileExt(trajPath),
-    options = mergeMolstarOptions(molstarOptions)
+    options = mergeMolstarOptions(userOptions)
   }
   return f([[
          <iframe id='${frameId}' class="molstar-app" seamless allow="fullscreen" srcdoc='
