@@ -1,3 +1,15 @@
+
+local base64 = quarto.base64
+
+local function read_file(path)
+    local file = io.open(path, "r")
+    if not file then return nil end
+    local content = file:read "*a"
+    file:close()
+    return content
+end
+
+
 local function f(s, kwargs)
   return (s:gsub('($%b{})', function(w) return kwargs[w:sub(3, -2)] or w end))
 end
@@ -234,18 +246,27 @@ return {
 
     addDependencies(useIframes)
 
-    local pdbPath = pandoc.utils.stringify(args[1])
-    local appId = 'app-' .. pdbPath
+    local url = pandoc.utils.stringify(args[1])
+    local appId = 'app-' .. url
+
+
+    -- if the url is a path to a local file, we can read it
+    local pdbContent = read_file(url)
+    if pdbContent then
+      local base64Content = base64.encode(pdbContent)
+      url = 'data:text/plain;base64,'..base64Content
+    end
+
 
     if useIframes then
-      return pandoc.RawBlock('html', urlViewerIframe(appId, pdbPath, kwargs))
+      return pandoc.RawBlock('html', urlViewerIframe(appId, url, kwargs))
     else
       return {
         pandoc.Div(
           {},
           { id = appId, class = 'molstar-app' }
         ),
-        pandoc.RawBlock('html', urlViewer(appId, pdbPath, kwargs)),
+        pandoc.RawBlock('html', urlViewer(appId, url, kwargs)),
       }
     end
   end,
