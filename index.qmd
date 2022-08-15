@@ -55,6 +55,12 @@ For example, if you don't have an animation you might want to hide the animation
 
 There is a list of available options in the molstar source code: [here](https://github.com/molstar/molstar/blob/33963c085a79e5eec64160b64c5d6ff3782b477b/src/apps/viewer/app.ts#L72-L103).
 
+Example
+
+`{{{< mol-rcsb 7eqr viewportShowAnimation=false >}}}`
+
+{{< mol-rcsb 7eqr viewportShowAnimation=false >}}
+
 ### CSS
 
 Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don't embed the same thing twice, it will only show up once). So the first app on this page will respond to css for `#app-7sgl`.
