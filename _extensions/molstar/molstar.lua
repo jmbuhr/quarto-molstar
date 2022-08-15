@@ -1,6 +1,4 @@
-local base64 = quarto.base64
-
-local useSelfContained = true
+local p = quarto.utils.dump
 
 local function read_file(path)
     local file = io.open(path, "r")
@@ -253,7 +251,7 @@ return {
     end
   end,
 
-  ['mol-url'] = function(args, kwargs)
+  ['mol-url'] = function(args, kwargs, meta)
     if not quarto.doc.isFormat("html:js") then
       return pandoc.Null()
     end
@@ -269,15 +267,13 @@ return {
     local type = fileExt(url)
 
     -- if the url is a path to a local file, we can read it
+    -- otherwise will be nil
     local pdbContent = read_file(url)
-    -- if pdbContent then
-    --   local base64Content = base64.encode(pdbContent)
-    --   url = 'data:text/plain;base64,'..base64Content
-    -- end
+    molstarMeta = pandoc.utils.stringify(meta['molstar'])
 
     if useIframes then
       return pandoc.RawBlock('html', urlViewerIframe(appId, url, kwargs))
-    elseif useSelfContained and pdbContent then
+    elseif molstarMeta == 'embed' and pdbContent then
       return {
         pandoc.Div(
           {},
