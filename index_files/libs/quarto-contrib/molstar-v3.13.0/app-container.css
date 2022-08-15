@@ -5,3 +5,6 @@ div .molstar-app {
   margin-bottom: 1rem;
 }
 
+.msp-plugin .msp-layout-expanded {
+    z-index: 1;
+}

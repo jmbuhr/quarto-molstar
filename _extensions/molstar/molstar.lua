@@ -1,12 +1,42 @@
+-- for development:
+local p = quarto.utils.dump
+
+---@type boolean
+local useIframes = false
+if quarto.doc.isFormat("revealjs") then
+  useIframes = true
+end
+
+---@param path string Path to the file
+---@return string|nil The file content
+local function readFile(path)
+  local file = io.open(path, "r")
+  if not file then return nil end
+  local content = file:read "*a"
+  file:close()
+  return content
+end
+
+---Format string like in bash or python,
+---e.g. f('Hello ${one}', {one = 'world'})
+---@param s string The string to format
+---@param kwargs {[string]: string} A table with key-value replacemen pairs
+---@return string
 local function f(s, kwargs)
   return (s:gsub('($%b{})', function(w) return kwargs[w:sub(3, -2)] or w end))
 end
 
+---Get the file extension
+---@param path string
+---@return string
 local function fileExt(path)
   return path:match("[^.]+$")
 end
 
-local function addDependencies(useIframes)
+---Add molstar css and js dependencies.
+---Can be linked / embedded for regular html documents,
+---but have to be copied for revealjs to be used in iframes
+local function addDependencies()
   quarto.doc.addHtmlDependency {
     name = 'molstar',
     version = 'v3.13.0',
@@ -19,6 +49,9 @@ local function addDependencies(useIframes)
   end
 end
 
+---Merge user provided molstar options with defaults
+---@param userOptions table
+---@return string JSON string to pass to molstar
 local function mergeMolstarOptions(userOptions)
   local defaultOptions = {
     layoutIsExpanded = false,
@@ -38,7 +71,7 @@ local function mergeMolstarOptions(userOptions)
   end
 
   for k, v in pairs(userOptions) do
-    value = pandoc.utils.stringify(v)
+    local value = pandoc.utils.stringify(v)
     if value == 'true' then value = true end
     if value == 'false' then value = false end
     defaultOptions[k] = value
@@ -47,151 +80,89 @@ local function mergeMolstarOptions(userOptions)
   return quarto.json.encode(defaultOptions)
 end
 
-local function rcsbViewer(appId, pdbId, userOptions)
-  local subs = { appId = appId, pdb = pdbId, height = height, options = mergeMolstarOptions(userOptions) }
-  return f([[
-         <script type="text/javascript">
-          molstar.Viewer.create("${appId}", ${options}).then(viewer => {
-            viewer.loadPdb("${pdb}");
-          });
-          </script>
-          ]], subs)
+---@param viewerFunctionString string
+---@return string
+local function wrapInlineIframe(viewerFunctionString)
+  return [[
+    <iframe id="${frameId}" class="molstar-app" seamless allow="fullscreen" srcdoc='
+    <html>
+    <head>
+    <script type="text/javascript" src="./molstar.js"></script>
+    <link rel="stylesheet" type="text/css" href="./molstar.css"/>
+    </head>
+    <body>
+    <div id="${appId}" class="molstar-app"></div>
+    <script type="text/javascript">
+    molstar.Viewer.create("${appId}", ${options}).then(viewer => {
+    ]] .. viewerFunctionString .. [[
+    });
+    </script>
+    </body>
+    </html>
+    '>
+    </iframe>
+    ]]
 end
 
-local function rcsbViewerIframe(appId, pdbId, userOptions)
-  local frameId = 'frame' .. appId
-  local subs = { frameId = frameId, appId = appId, pdb = pdbId, options = mergeMolstarOptions(userOptions) }
-  return f([[
-         <iframe id='${frameId}' class="molstar-app" seamless allow="fullscreen" srcdoc='
-         <html>
-         <head>
-         <script type="text/javascript" src="./molstar.js"></script>
-         <link rel="stylesheet" type="text/css" href="./molstar.css"/>
-         </head>
-         <body>
-         <div id="${appId}"></div>
-         <script type="text/javascript">
-          molstar.Viewer.create("${appId}", ${options}).then(viewer => {
-            viewer.loadPdb("${pdb}");
-          });
-          </script>
-          </body>
-          </html>
-          '>
-          </iframe>
-          ]], subs)
+---@param viewerFunctionString string
+---@return string
+local function wrapInlineDiv(viewerFunctionString)
+  return [[
+    <div id="${appId}" class="molstar-app"></div>
+    <script type="text/javascript">
+    molstar.Viewer.create("${appId}", ${options}).then(viewer => {
+    ]] .. viewerFunctionString .. [[
+    });
+    </script>
+    ]]
 end
 
-local function urlViewer(appId, topPath, userOptions)
+---@param args table
+---@return string
+local function createViewer(args)
   local subs = {
-    appId = appId,
-    top = topPath,
-    topExt = fileExt(topPath),
-    options = mergeMolstarOptions(userOptions)
+    appId = args.appId,
+    url = args.url,
+    pdb = args.pdbId,
+    trajUrl = args.trajUrl,
+    trajExtension = args.trajExtension,
+    data = args.data,
+    fileExtension = args.fileExtension,
+    options = mergeMolstarOptions(args.userOptions)
   }
-  return f([[
-         <script type="text/javascript">
-          molstar.Viewer.create('${appId}', ${options}).then(viewer => {
-            viewer.loadStructureFromUrl('${top}', format='${topExt}');
-          });
-          </script>
-          ]], subs)
-end
 
-local function urlViewerIframe(appId, topPath, userOptions)
-  local frameId = 'frame' .. appId
-  local subs = {
-    appId = appId,
-    top = topPath,
-    frameId = frameId,
-    topExt = fileExt(topPath),
-    options = mergeMolstarOptions(userOptions)
-  }
-  return f([[
-         <iframe id="${frameId}" class="molstar-app" seamless allow="fullscreen" srcdoc='
-         <html>
-         <head>
-         <script type="text/javascript" src="./molstar.js"></script>
-         <link rel="stylesheet" type="text/css" href="./molstar.css"/>
-         </head>
-         <body>
-         <div id="${appId}"></div>
-         <script type="text/javascript">
-          molstar.Viewer.create("${appId}", ${options}).then(viewer => {
-            viewer.loadStructureFromUrl("${top}", format="${topExt}");
-          });
-          </script>
-          '>
-          </iframe>
-          ]], subs)
-end
+  local wrapper
+  local viewerFunction
 
-local function trajViewer(appId, topPath, trajPath, userOptions)
-  local subs = {
-    appId   = appId,
-    top     = topPath,
-    topExt  = fileExt(topPath),
-    traj    = trajPath,
-    trajExt = fileExt(trajPath),
-    options = mergeMolstarOptions(userOptions)
-  }
-  return f([[
-         <script type="text/javascript">
-          molstar.Viewer.create('${appId}', ${options}).then(viewer => {
-            viewer.loadTrajectory(
-            {
-              model: {
-                kind: 'model-url', url: '${top}', format: '${topExt}'
-              },
-              coordinates: {
-                kind: 'coordinates-url', url: '${traj}',
-                format: '${trajExt}', isBinary: true
-              }
-            }
-            );
-          });
-          </script>
-          ]], subs)
-end
+  if useIframes then
+    wrapper = wrapInlineIframe
+  else
+    wrapper = wrapInlineDiv
+  end
 
-local function trajViewerIframe(appId, topPath, trajPath, userOptions)
-  local frameId = 'frame' .. appId
-  local subs = {
-    appId   = appId,
-    frameId = frameId,
-    top     = topPath,
-    topExt  = fileExt(topPath),
-    traj    = trajPath,
-    trajExt = fileExt(trajPath),
-    options = mergeMolstarOptions(userOptions)
-  }
-  return f([[
-         <iframe id='${frameId}' class="molstar-app" seamless allow="fullscreen" srcdoc='
-         <html>
-         <head>
-         <script type="text/javascript" src="./molstar.js"></script>
-         <link rel="stylesheet" type="text/css" href="./molstar.css"/>
-         </head>
-         <body>
-         <div id="${appId}"></div>
-         <script type="text/javascript">
-          molstar.Viewer.create("${appId}", ${options}).then(viewer => {
-            viewer.loadTrajectory(
-            {
-              model: {
-                kind: "model-url", url: "${top}", format: "${topExt}"
-              },
-              coordinates: {
-                kind: "coordinates-url", url: "${traj}",
-                format: "${trajExt}", isBinary: true
-              }
-            }
-            );
-          });
-          </script>
-          '>
-          </iframe>
-          ]], subs)
+  if args.data then -- if we have embedded data, use it
+    viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${fileExtension}");'
+  elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
+    viewerFunction = 'viewer.loadPdb("${pdb}");'
+  elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
+    viewerFunction = [[
+    viewer.loadTrajectory(
+    {
+      model: {
+        kind: "model-url", url: "${url}", format: "${fileExtension}"
+      },
+      coordinates: {
+        kind: "coordinates-url", url: "${trajUrl}",
+        format: "${trajExtension}", isBinary: true
+      }
+    }
+    );
+    ]]
+  else -- otherwise read from url (local or remote)
+    viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${fileExtension}");'
+  end
+
+  return f(wrapper(viewerFunction), subs)
 end
 
 return {
@@ -201,53 +172,42 @@ return {
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
-    end
-
-    addDependencies(useIframes)
+    addDependencies()
 
     local pdbId = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. pdbId
 
-    if useIframes then
-      return pandoc.RawBlock('html', rcsbViewerIframe(appId, pdbId, kwargs))
-    else
-      return {
-        pandoc.Div(
-          {},
-          { id = appId, class = 'molstar-app' }
-        ),
-        pandoc.RawBlock('html', rcsbViewer(appId, pdbId, kwargs)),
-      }
-    end
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      pdbId = pdbId,
+      userOptions = kwargs
+    })
   end,
 
-  ['mol-url'] = function(args, kwargs)
+  ['mol-url'] = function(args, kwargs, meta)
     if not quarto.doc.isFormat("html:js") then
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
+    addDependencies()
+
+    local url = pandoc.utils.stringify(args[1])
+    local appId = 'app-' .. url
+    local fileExtension = fileExt(url)
+
+    local molstarMeta = pandoc.utils.stringify(meta['molstar'])
+    local pdbContent
+    if molstarMeta == 'embed' and not useIframes then
+      ---@type string|nil
+      pdbContent = readFile(url)
     end
-
-    addDependencies(useIframes)
-
-    local pdbPath = pandoc.utils.stringify(args[1])
-    local appId = 'app-' .. pdbPath
-
-    if useIframes then
-      return pandoc.RawBlock('html', urlViewerIframe(appId, pdbPath, kwargs))
-    else
-      return {
-        pandoc.Div(
-          {},
-          { id = appId, class = 'molstar-app' }
-        ),
-        pandoc.RawBlock('html', urlViewer(appId, pdbPath, kwargs)),
-      }
-    end
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      url = url,
+      data = pdbContent,
+      fileExtension = fileExtension,
+      userOptions = kwargs
+    })
   end,
 
   ['mol-traj'] = function(args, kwargs)
@@ -255,26 +215,19 @@ return {
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
-    end
-
     addDependencies()
 
-    local topPath = pandoc.utils.stringify(args[1])
-    local trajPath = pandoc.utils.stringify(args[2])
-    local appId = 'app-' .. topPath .. trajPath
+    local url = pandoc.utils.stringify(args[1])
+    local trajUrl = pandoc.utils.stringify(args[2])
+    local appId = 'app-' .. url .. trajUrl
 
-    if useIframes then
-      return pandoc.RawBlock('html', trajViewerIframe(appId, topPath, trajPath, kwargs))
-    else
-      return {
-        pandoc.Div(
-          {},
-          { id = appId, class = 'molstar-app' }
-        ),
-        pandoc.RawBlock('html', trajViewer(appId, topPath, trajPath, kwargs))
-      }
-    end
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      url = url,
+      trajUrl = trajUrl,
+      fileExtension = fileExt(url),
+      trajExtension = fileExt(trajUrl),
+      userOptions = kwargs
+    })
   end,
 }

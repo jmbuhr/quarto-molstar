@@ -21,10 +21,15 @@
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: 1;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
   </style>
   <link rel="stylesheet" href="presentation_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link rel="stylesheet" href="presentation.css">
@@ -329,118 +334,122 @@
 <h2>RCSB PDB</h2>
 <p>Get a protein from the RCSB PDB with:</p>
 <p><code>{{&lt; mol-rcsb 7sgl &gt;}}</code></p>
-         <iframe id="frameapp-7sgl" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-         <html>
-         <head>
-         <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-         <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-         </head>
-         <body>
-         <div id=&quot;app-7sgl&quot;></div>
-         <script type=&quot;text/javascript&quot;>
-          molstar.Viewer.create(&quot;app-7sgl&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-            viewer.loadPdb(&quot;7sgl&quot;);
-          });
-          </script>
-          </body>
-          </html>
-          ">
-          </iframe>
-          
+    <iframe id="${frameId}" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-7sgl&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-7sgl&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLog&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
+    viewer.loadPdb(&quot;7sgl&quot;);    });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 </section>
 <section id="local-pdb-file" class="slide level2">
 <h2>Local pdb file</h2>
 <p>Get a local pdb file with:</p>
 <p><code>{{&lt; mol-url ./www/7sgl.pdb &gt;}}</code></p>
-         <iframe id="frameapp-./www/7sgl.pdb" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-         <html>
-         <head>
-         <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-         <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-         </head>
-         <body>
-         <div id=&quot;app-./www/7sgl.pdb&quot;></div>
-         <script type=&quot;text/javascript&quot;>
-          molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-            viewer.loadStructureFromUrl(&quot;./www/7sgl.pdb&quot;, format=&quot;pdb&quot;);
-          });
-          </script>
-          ">
-          </iframe>
-          
+    <iframe id="${frameId}" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-./www/7sgl.pdb&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLog&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
+    viewer.loadStructureFromUrl(&quot;./www/7sgl.pdb&quot;, format=&quot;pdb&quot;);    });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 </section>
 <section id="pdb-file-from-url" class="slide level2">
 <h2>pdb file from url</h2>
 <p>Get a pdb file from a url:</p>
 <p><code>{{&lt; mol-url https://files.rcsb.org/download/7sgl.pdb &gt;}}</code></p>
-         <iframe id="frameapp-https://files.rcsb.org/download/7sgl.pdb" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-         <html>
-         <head>
-         <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-         <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-         </head>
-         <body>
-         <div id=&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot;></div>
-         <script type=&quot;text/javascript&quot;>
-          molstar.Viewer.create(&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-            viewer.loadStructureFromUrl(&quot;https://files.rcsb.org/download/7sgl.pdb&quot;, format=&quot;pdb&quot;);
-          });
-          </script>
-          ">
-          </iframe>
-          
+    <iframe id="${frameId}" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLog&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
+    viewer.loadStructureFromUrl(&quot;https://files.rcsb.org/download/7sgl.pdb&quot;, format=&quot;pdb&quot;);    });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 </section>
 <section id="local-xyz-file" class="slide level2">
 <h2>local xyz file</h2>
 <p>Get a local xyz file with:</p>
 <p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
-         <iframe id="frameapp-./www/example.xyz" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-         <html>
-         <head>
-         <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-         <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-         </head>
-         <body>
-         <div id=&quot;app-./www/example.xyz&quot;></div>
-         <script type=&quot;text/javascript&quot;>
-          molstar.Viewer.create(&quot;app-./www/example.xyz&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-            viewer.loadStructureFromUrl(&quot;./www/example.xyz&quot;, format=&quot;xyz&quot;);
-          });
-          </script>
-          ">
-          </iframe>
-          
+    <iframe id="${frameId}" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-./www/example.xyz&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-./www/example.xyz&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLog&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
+    viewer.loadStructureFromUrl(&quot;./www/example.xyz&quot;, format=&quot;xyz&quot;);    });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 </section>
 <section id="local-pdb-and-trajectory" class="slide level2">
 <h2>local pdb and trajectory</h2>
 <p>Load a topology and a trajectory with:</p>
 <p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
-         <iframe id="frameapp-./www/example.pdb./www/example.xtc" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-         <html>
-         <head>
-         <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-         <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-         </head>
-         <body>
-         <div id=&quot;app-./www/example.pdb./www/example.xtc&quot;></div>
-         <script type=&quot;text/javascript&quot;>
-          molstar.Viewer.create(&quot;app-./www/example.pdb./www/example.xtc&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowAnimation&quot;:true,&quot;viewportShowSelectionMode&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
-            viewer.loadTrajectory(
-            {
-              model: {
-                kind: &quot;model-url&quot;, url: &quot;./www/example.pdb&quot;, format: &quot;pdb&quot;
-              },
-              coordinates: {
-                kind: &quot;coordinates-url&quot;, url: &quot;./www/example.xtc&quot;,
-                format: &quot;xtc&quot;, isBinary: true
-              }
-            }
-            );
-          });
-          </script>
-          ">
-          </iframe>
-          
+    <iframe id="${frameId}" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
+    <html>
+    <head>
+    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
+    </head>
+    <body>
+    <div id=&quot;app-./www/example.pdb./www/example.xtc&quot; class=&quot;molstar-app&quot;></div>
+    <script type=&quot;text/javascript&quot;>
+    molstar.Viewer.create(&quot;app-./www/example.pdb./www/example.xtc&quot;, {&quot;layoutIsExpanded&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowLog&quot;:false,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowControls&quot;:false,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;}).then(viewer => {
+        viewer.loadTrajectory(
+    {
+      model: {
+        kind: &quot;model-url&quot;, url: &quot;./www/example.pdb&quot;, format: &quot;pdb&quot;
+      },
+      coordinates: {
+        kind: &quot;coordinates-url&quot;, url: &quot;./www/example.xtc&quot;,
+        format: &quot;xtc&quot;, isBinary: true
+      }
+    }
+    );
+        });
+    </script>
+    </body>
+    </html>
+    ">
+    </iframe>
+    
 <div class="footer footer-default">
 
 </div>
@@ -724,7 +733,8 @@
       for (var i=0; i<noterefs.length; i++) {
         const ref = noterefs[i];
         tippyHover(ref, function() {
-          let href = ref.getAttribute('href');
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href');
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);

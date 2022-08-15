@@ -1,7 +1,13 @@
 ---
 title: Molstar example
 format: html
+toc: true
+# molstar: embed
 ---
+
+# Usage examples for
+
+<https://github.com/jmbuhr/quarto-molstar>
 
 ## RCSB PDB
 
@@ -55,6 +61,24 @@ For example, if you don't have an animation you might want to hide the animation
 
 There is a list of available options in the molstar source code: [here](https://github.com/molstar/molstar/blob/33963c085a79e5eec64160b64c5d6ff3782b477b/src/apps/viewer/app.ts#L72-L103).
 
+Example
+
+`{{{< mol-rcsb 7eqr viewportShowAnimation=false >}}}`
+
+{{< mol-rcsb 7eqr viewportShowAnimation=false >}}
+
+### Global options
+
+To embed plain text files (such as `.pdb`, `.xyz`) into the rendered html, add this to your yml header:
+
+```yml
+molstar: embed
+```
+
+The molecules will then also appear if you open the html file without a web server.
+Note that this can increase the size of the file significantly and only works with the `mol-url` shortcode.
+It does not work for binary trajectory formats such as `xtc`.
+
 ### CSS
 
 Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don't embed the same thing twice, it will only show up once). So the first app on this page will respond to css for `#app-7sgl`.
@@ -69,7 +93,7 @@ All apps have the class `molstar-app` and the following css is included by defau
 }
 ```
 
-For example, I might want to make one app in a presentation a bit shorter because there is text above it:
+For example, you might want to make one app a bit shorter because there is text above it:
 
 ```css
 #app-7sgl {
