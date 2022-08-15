@@ -1,13 +1,20 @@
+-- for development:
 local p = quarto.utils.dump
 
-local function read_file(path)
+
+local useIframes = false
+if quarto.doc.isFormat("revealjs") then
+  useIframes = true
+end
+
+
+local function readFile(path)
     local file = io.open(path, "r")
     if not file then return nil end
     local content = file:read "*a"
     file:close()
     return content
 end
-
 
 local function f(s, kwargs)
   return (s:gsub('($%b{})', function(w) return kwargs[w:sub(3, -2)] or w end))
@@ -17,7 +24,7 @@ local function fileExt(path)
   return path:match("[^.]+$")
 end
 
-local function addDependencies(useIframes)
+local function addDependencies()
   quarto.doc.addHtmlDependency {
     name = 'molstar',
     version = 'v3.13.0',
@@ -49,7 +56,7 @@ local function mergeMolstarOptions(userOptions)
   end
 
   for k, v in pairs(userOptions) do
-    value = pandoc.utils.stringify(v)
+    local value = pandoc.utils.stringify(v)
     if value == 'true' then value = true end
     if value == 'false' then value = false end
     defaultOptions[k] = value
@@ -59,7 +66,7 @@ local function mergeMolstarOptions(userOptions)
 end
 
 local function rcsbViewer(appId, pdbId, userOptions)
-  local subs = { appId = appId, pdb = pdbId, height = height, options = mergeMolstarOptions(userOptions) }
+  local subs = { appId = appId, pdb = pdbId, options = mergeMolstarOptions(userOptions) }
   return f([[
          <script type="text/javascript">
           molstar.Viewer.create("${appId}", ${options}).then(viewer => {
@@ -229,11 +236,7 @@ return {
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
-    end
-
-    addDependencies(useIframes)
+    addDependencies()
 
     local pdbId = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. pdbId
@@ -256,11 +259,7 @@ return {
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
-    end
-
-    addDependencies(useIframes)
+    addDependencies()
 
     local url = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. url
@@ -268,8 +267,8 @@ return {
 
     -- if the url is a path to a local file, we can read it
     -- otherwise will be nil
-    local pdbContent = read_file(url)
-    molstarMeta = pandoc.utils.stringify(meta['molstar'])
+    local pdbContent = readFile(url)
+    local molstarMeta = pandoc.utils.stringify(meta['molstar'])
 
     if useIframes then
       return pandoc.RawBlock('html', urlViewerIframe(appId, url, kwargs))
@@ -297,9 +296,6 @@ return {
       return pandoc.Null()
     end
 
-    if quarto.doc.isFormat("revealjs") then
-      useIframes = true
-    end
 
     addDependencies()
 
