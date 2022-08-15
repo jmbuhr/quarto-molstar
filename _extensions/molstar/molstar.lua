@@ -1,5 +1,6 @@
-
 local base64 = quarto.base64
+
+local useSelfContained = true
 
 local function read_file(path)
     local file = io.open(path, "r")
@@ -105,6 +106,23 @@ local function urlViewer(appId, topPath, userOptions)
          <script type="text/javascript">
           molstar.Viewer.create('${appId}', ${options}).then(viewer => {
             viewer.loadStructureFromUrl('${top}', format='${topExt}');
+          });
+          </script>
+          ]], subs)
+end
+
+
+local function urlViewerData(appId, data, type, userOptions)
+  local subs = {
+    appId = appId,
+    top = data,
+    topExt = type,
+    options = mergeMolstarOptions(userOptions)
+  }
+  return f([[
+         <script type="text/javascript">
+          molstar.Viewer.create('${appId}', ${options}).then(viewer => {
+            viewer.loadStructureFromData(`${top}`, format='${topExt}');
           });
           </script>
           ]], subs)
@@ -248,18 +266,25 @@ return {
 
     local url = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. url
-
+    local type = fileExt(url)
 
     -- if the url is a path to a local file, we can read it
     local pdbContent = read_file(url)
-    if pdbContent then
-      local base64Content = base64.encode(pdbContent)
-      url = 'data:text/plain;base64,'..base64Content
-    end
-
+    -- if pdbContent then
+    --   local base64Content = base64.encode(pdbContent)
+    --   url = 'data:text/plain;base64,'..base64Content
+    -- end
 
     if useIframes then
       return pandoc.RawBlock('html', urlViewerIframe(appId, url, kwargs))
+    elseif useSelfContained and pdbContent then
+      return {
+        pandoc.Div(
+          {},
+          { id = appId, class = 'molstar-app' }
+        ),
+        pandoc.RawBlock('html', urlViewerData(appId, pdbContent, type, kwargs)),
+      }
     else
       return {
         pandoc.Div(
