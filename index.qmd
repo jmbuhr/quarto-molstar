@@ -1,6 +1,7 @@
 ---
 title: Molstar example
 format: html
+toc: true
 # molstar: embed
 ---
 

@@ -3,9 +3,11 @@ title: Molstar example
 format:
   revealjs:
     css: presentation.css
+molstar: embed
 ---
 
 ## RCSB PDB
+
 
 Get a protein from the RCSB PDB with:
 
