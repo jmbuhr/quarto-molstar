@@ -49,6 +49,15 @@ Load a topology and a trajectory with:
 
 {{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
+## snapshot file
+
+Load a snapshot file, to share a saved Mol* session which will save aesthetic 
+parameters and scene setup.
+
+`{{{< mol-snapshot ./www/molstar.molj >}}}`
+
+{{< mol-snapshot ./www/molstar.molj >}}
+
 ## local file with volume information
 
 

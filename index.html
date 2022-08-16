@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.0.35">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -113,6 +113,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#pdb-file-from-url" id="toc-pdb-file-from-url" class="nav-link" data-scroll-target="#pdb-file-from-url">pdb file from url</a></li>
   <li><a href="#local-xyz-file" id="toc-local-xyz-file" class="nav-link" data-scroll-target="#local-xyz-file">local xyz file</a></li>
   <li><a href="#local-pdb-and-trajectory" id="toc-local-pdb-and-trajectory" class="nav-link" data-scroll-target="#local-pdb-and-trajectory">local pdb and trajectory</a></li>
+  <li><a href="#snapshot-file" id="toc-snapshot-file" class="nav-link" data-scroll-target="#snapshot-file">snapshot file</a></li>
   <li><a href="#local-file-with-volume-information" id="toc-local-file-with-volume-information" class="nav-link" data-scroll-target="#local-file-with-volume-information">local file with volume information</a></li>
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a>
   <ul class="collapse">
@@ -151,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-rcsb 7sgl &gt;}}</code></p>
     <div id="app-7sgl" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7sgl", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-7sgl", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
     viewer.loadPdb("7sgl");    });
     </script>
     
@@ -162,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url ./www/7sgl.pdb &gt;}}</code></p>
     <div id="app-./www/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/7sgl.pdb", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/7sgl.pdb", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
     viewer.loadStructureFromUrl("./www/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -173,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url https://files.rcsb.org/download/7sgl.pdb &gt;}}</code></p>
     <div id="app-https://files.rcsb.org/download/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
     viewer.loadStructureFromUrl("https://files.rcsb.org/download/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -184,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
     <div id="app-./www/example.xyz" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.xyz", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/example.xyz", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
     viewer.loadStructureFromUrl("./www/example.xyz", format="xyz");    });
     </script>
     
@@ -195,7 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
     <div id="app-./www/example.pdb./www/example.xtc" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
         viewer.loadTrajectory(
     {
       model: {
@@ -211,12 +212,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </script>
     
 </section>
+<section id="snapshot-file" class="level2">
+<h2 class="anchored" data-anchor-id="snapshot-file">snapshot file</h2>
+<p>Load a snapshot file, to share a saved Mol* session which will save aesthetic parameters and scene setup.</p>
+<p><code>{{&lt; mol-snapshot ./www/molstar.molj &gt;}}</code></p>
+    <div id="app-./www/molstar.molj" class="molstar-app"></div>
+    <script type="text/javascript">
+    molstar.Viewer.create("app-./www/molstar.molj", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    viewer.loadSnapshotFromUrl(url="./www/molstar.molj", "molj");    });
+    </script>
+    
+</section>
 <section id="local-file-with-volume-information" class="level2">
 <h2 class="anchored" data-anchor-id="local-file-with-volume-information">local file with volume information</h2>
 <p><code>{{&lt; mol-volume ./www/traj.xyz ./www/density.cube &gt;}}</code></p>
     <div id="app-./www/traj.xyz./www/density.cube" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
         viewer.loadStructureFromUrl("./www/traj.xyz", "xyz")
     viewer.loadVolumeFromUrl(
     {url: "./www/density.cube",
@@ -243,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-rcsb 7eqr viewportShowAnimation=false &gt;}}</code></p>
     <div id="app-7eqr" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7eqr", {"layoutIsExpanded":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":false,"viewportShowSelectionMode":false,"layoutShowLog":false,"emdbProvider":"rcsb","viewportShowExpand":true,"pdbProvider":"rcsb","layoutShowSequence":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-7eqr", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":false,"layoutShowRemoteState":false}).then(viewer => {
     viewer.loadPdb("7eqr");    });
     </script>
     

@@ -176,8 +176,8 @@ local function createViewer(args)
       ]
     );
     ]]
-  elseif args.snapshotUrl then
-    viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", type="molj");'
+  elseif args.snapshotUrl and args.snapshotExtension then
+    viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
   else -- otherwise read from url (local or remote)
     viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
@@ -243,6 +243,7 @@ return {
     return pandoc.RawBlock('html', createViewer {
       appId = appId,
       snapshotUrl = url,
+      snapshotExtension = fileExt(url),
       userOptions = kwargs
     })
   end,
