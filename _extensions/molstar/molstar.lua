@@ -123,11 +123,13 @@ local function createViewer(args)
   local subs = {
     appId = args.appId,
     url = args.url,
+    urlExtension = args.urlExtension,
     pdb = args.pdbId,
     trajUrl = args.trajUrl,
     trajExtension = args.trajExtension,
+    volumeUrl = args.volumeUrl,
+    volumeExtension = args.volumeExtension,
     data = args.data,
-    fileExtension = args.fileExtension,
     options = mergeMolstarOptions(args.userOptions)
   }
 
@@ -141,7 +143,7 @@ local function createViewer(args)
   end
 
   if args.data then -- if we have embedded data, use it
-    viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${fileExtension}");'
+    viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${urlExtension}");'
   elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
     viewerFunction = 'viewer.loadPdb("${pdb}");'
   elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
@@ -149,7 +151,7 @@ local function createViewer(args)
     viewer.loadTrajectory(
     {
       model: {
-        kind: "model-url", url: "${url}", format: "${fileExtension}"
+        kind: "model-url", url: "${url}", format: "${urlExtension}"
       },
       coordinates: {
         kind: "coordinates-url", url: "${trajUrl}",
@@ -158,8 +160,22 @@ local function createViewer(args)
     }
     );
     ]]
+  elseif args.volumeUrl and args.volumeExtension then
+    viewerFunction = [[
+    viewer.loadStructureFromUrl("${url}", "${urlExtension}")
+    viewer.loadVolumeFromUrl(
+    {url: "${volumeUrl}",
+    format: "${volumeExtension}",
+    isBinary: false},
+    [{type: "absolute",
+    alpha: 1,
+    value: 0.001, 
+      }
+      ]
+    );
+    ]]
   else -- otherwise read from url (local or remote)
-    viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${fileExtension}");'
+    viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
 
   return f(wrapper(viewerFunction), subs)
@@ -193,7 +209,7 @@ return {
 
     local url = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. url
-    local fileExtension = fileExt(url)
+    local urlExtension = fileExt(url)
 
     local molstarMeta = pandoc.utils.stringify(meta['molstar'])
     local pdbContent
@@ -205,7 +221,7 @@ return {
       appId = appId,
       url = url,
       data = pdbContent,
-      fileExtension = fileExtension,
+      urlExtension = urlExtension,
       userOptions = kwargs
     })
   end,
@@ -225,9 +241,31 @@ return {
       appId = appId,
       url = url,
       trajUrl = trajUrl,
-      fileExtension = fileExt(url),
+      urlExtension = fileExt(url),
       trajExtension = fileExt(trajUrl),
       userOptions = kwargs
     })
   end,
+
+  ['mol-volume'] = function(args, kwargs)
+    if not quarto.doc.isFormat("html:js") then
+      return pandoc.Null()
+    end
+
+    addDependencies()
+
+    local url = pandoc.utils.stringify(args[1])
+    local volumeUrl = pandoc.utils.stringify(args[2])
+    local appId = 'app-' .. url .. volumeUrl
+
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      url = url,
+      volumeUrl = volumeUrl,
+      urlExtension = fileExt(url),
+      volumeExtension = fileExt(volumeUrl),
+      userOptions = kwargs
+    })
+  end,
+
 }

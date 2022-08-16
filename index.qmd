@@ -49,6 +49,14 @@ Load a topology and a trajectory with:
 
 {{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
+## local file with volume information
+
+
+`{{{< mol-volume ./www/traj.xyz ./www/density.cube >}}}`
+
+{{< mol-volume ./www/traj.xyz ./www/density.cube >}}
+
+
 ## Customization
 
 ### Molstar options
