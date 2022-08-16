@@ -129,6 +129,8 @@ local function createViewer(args)
     trajExtension = args.trajExtension,
     volumeUrl = args.volumeUrl,
     volumeExtension = args.volumeExtension,
+    snapshotUrl = args.snapshotUrl, 
+    snapshotExtension = args.snapshotExtension,
     data = args.data,
     options = mergeMolstarOptions(args.userOptions)
   }
@@ -174,6 +176,8 @@ local function createViewer(args)
       ]
     );
     ]]
+  elseif args.snapshotUrl then
+    viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", type="molj");'
   else -- otherwise read from url (local or remote)
     viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
@@ -222,6 +226,23 @@ return {
       url = url,
       data = pdbContent,
       urlExtension = urlExtension,
+      userOptions = kwargs
+    })
+  end,
+  
+  ['mol-snapshot'] = function(args, kwargs, meta)
+    if not quarto.doc.isFormat("html:js") then
+      return pandoc.Null()
+    end
+
+    addDependencies()
+
+    local url = pandoc.utils.stringify(args[1])
+    local appId = 'app-' .. url
+
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      snapshotUrl = url,
       userOptions = kwargs
     })
   end,
