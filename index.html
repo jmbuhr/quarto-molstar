@@ -109,6 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#usage-examples-for" id="toc-usage-examples-for" class="nav-link active" data-scroll-target="#usage-examples-for">Usage examples for</a>
   <ul class="collapse">
   <li><a href="#rcsb-pdb" id="toc-rcsb-pdb" class="nav-link" data-scroll-target="#rcsb-pdb">RCSB PDB</a></li>
+  <li><a href="#alphafold-model." id="toc-alphafold-model." class="nav-link" data-scroll-target="#alphafold-model.">AlphaFold model.</a></li>
   <li><a href="#local-pdb-file" id="toc-local-pdb-file" class="nav-link" data-scroll-target="#local-pdb-file">Local pdb file</a></li>
   <li><a href="#pdb-file-from-url" id="toc-pdb-file-from-url" class="nav-link" data-scroll-target="#pdb-file-from-url">pdb file from url</a></li>
   <li><a href="#local-xyz-file" id="toc-local-xyz-file" class="nav-link" data-scroll-target="#local-xyz-file">local xyz file</a></li>
@@ -152,8 +153,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-rcsb 7sgl &gt;}}</code></p>
     <div id="app-7sgl" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7sgl", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-7sgl", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadPdb("7sgl");    });
+    </script>
+    
+</section>
+<section id="alphafold-model." class="level2">
+<h2 class="anchored" data-anchor-id="alphafold-model.">AlphaFold model.</h2>
+<p>Load the predicted structure of a protein from the <a href="https://alphafold.com/">AlphaFold Database</a> using the AlphaFold Database ID. The loaded structure is coloured based on the prediction score.</p>
+<p><code>{{&lt; mol-afdb Q8W3K0 &gt;}}</code></p>
+    <div id="app-Q8W3K0" class="molstar-app"></div>
+    <script type="text/javascript">
+    molstar.Viewer.create("app-Q8W3K0", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
+    viewer.loadAlphaFoldDb(afdb="Q8W3K0")    });
     </script>
     
 </section>
@@ -163,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url ./www/7sgl.pdb &gt;}}</code></p>
     <div id="app-./www/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/7sgl.pdb", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/7sgl.pdb", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadStructureFromUrl("./www/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -174,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url https://files.rcsb.org/download/7sgl.pdb &gt;}}</code></p>
     <div id="app-https://files.rcsb.org/download/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadStructureFromUrl("https://files.rcsb.org/download/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -185,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
     <div id="app-./www/example.xyz" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.xyz", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/example.xyz", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadStructureFromUrl("./www/example.xyz", format="xyz");    });
     </script>
     
@@ -196,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
     <div id="app-./www/example.pdb./www/example.xtc" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
         viewer.loadTrajectory(
     {
       model: {
@@ -218,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-snapshot ./www/molstar.molj &gt;}}</code></p>
     <div id="app-./www/molstar.molj" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/molstar.molj", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/molstar.molj", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadSnapshotFromUrl(url="./www/molstar.molj", "molj");    });
     </script>
     
@@ -228,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-volume ./www/traj.xyz ./www/density.cube &gt;}}</code></p>
     <div id="app-./www/traj.xyz./www/density.cube" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":true,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":true,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
         viewer.loadStructureFromUrl("./www/traj.xyz", "xyz")
     viewer.loadVolumeFromUrl(
     {url: "./www/density.cube",
@@ -255,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>{{&lt; mol-rcsb 7eqr viewportShowAnimation=false &gt;}}</code></p>
     <div id="app-7eqr" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7eqr", {"layoutShowLog":false,"viewportShowExpand":true,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"layoutShowLeftPanel":true,"layoutShowControls":false,"layoutShowSequence":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","viewportShowAnimation":false,"layoutShowRemoteState":false}).then(viewer => {
+    molstar.Viewer.create("app-7eqr", {"layoutShowRemoteState":false,"layoutShowSequence":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false,"viewportShowAnimation":false,"layoutShowLeftPanel":true,"pdbProvider":"rcsb","emdbProvider":"rcsb","layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false}).then(viewer => {
     viewer.loadPdb("7eqr");    });
     </script>
     

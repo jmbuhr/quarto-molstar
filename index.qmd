@@ -17,6 +17,14 @@ Get a protein from the RCSB PDB with:
 
 {{< mol-rcsb 7sgl >}}
 
+## AlphaFold model.
+
+Load the predicted structure of a protein from the [AlphaFold Database](https://alphafold.com/) using the AlphaFold Database ID. The loaded structure is coloured based on the prediction score.
+
+`{{{< mol-afdb Q8W3K0 >}}}`
+
+{{< mol-afdb Q8W3K0 >}}
+
 ## Local pdb file
 
 Get a local pdb file with:
@@ -39,7 +47,7 @@ Get a local xyz file with:
 
 `{{{< mol-url ./www/example.xyz >}} }`
 
-{{< mol-url ./www/example.xyz >}} 
+{{< mol-url ./www/example.xyz >}}
 
 ## local pdb and trajectory
 
@@ -51,8 +59,7 @@ Load a topology and a trajectory with:
 
 ## snapshot file
 
-Load a snapshot file, to share a saved Mol* session which will save aesthetic 
-parameters and scene setup.
+Load a snapshot file, to share a saved Mol\* session which will save aesthetic parameters and scene setup.
 
 `{{{< mol-snapshot ./www/molstar.molj >}}}`
 
@@ -60,11 +67,9 @@ parameters and scene setup.
 
 ## local file with volume information
 
-
 `{{{< mol-volume ./www/traj.xyz ./www/density.cube >}}}`
 
 {{< mol-volume ./www/traj.xyz ./www/density.cube >}}
-
 
 ## Customization
 
@@ -88,7 +93,7 @@ Example
 
 To embed plain text files (such as `.pdb`, `.xyz`) into the rendered html, add this to your yml header:
 
-```yml
+``` yml
 molstar: embed
 ```
 
@@ -98,11 +103,12 @@ It does not work for binary trajectory formats such as `xtc`.
 
 ### CSS
 
-Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don't embed the same thing twice, it will only show up once). So the first app on this page will respond to css for `#app-7sgl`.
+Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don't embed the same thing twice, it will only show up once).
+So the first app on this page will respond to css for `#app-7sgl`.
 
 All apps have the class `molstar-app` and the following css is included by default:
 
-```css
+``` css
 .molstar-app {
   position: relative;
   width: 100%;
@@ -112,9 +118,8 @@ All apps have the class `molstar-app` and the following css is included by defau
 
 For example, you might want to make one app a bit shorter because there is text above it:
 
-```css
+``` css
 #app-7sgl {
   padding-bottom: 40%;
 }
 ```
-
