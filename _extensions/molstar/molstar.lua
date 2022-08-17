@@ -49,6 +49,24 @@ local function addDependencies()
   end
 end
 
+---Copy a resource to the output directory.
+---Necessary e.g. for a quarto site / blog
+---or deployment via quarto publish gh-pages.
+---@param path string Path to the resource
+local function addResource(path)
+  p(path)
+  local m = path:match('^https?://')
+  if m == nil then
+    quarto.doc.addHtmlDependency{
+      name = path,
+      version = path,
+      resources = {
+        {name = path, path = path}
+      }
+    }
+  end
+end
+
 ---Merge user provided molstar options with defaults
 ---@param userOptions table
 ---@return string JSON string to pass to molstar
@@ -150,6 +168,8 @@ local function createViewer(args)
   elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
     viewerFunction = 'viewer.loadPdb("${pdb}");'
   elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
+    addResource(args.url)
+    addResource(args.trajUrl)
     viewerFunction = [[
     viewer.loadTrajectory(
     {
@@ -163,7 +183,9 @@ local function createViewer(args)
     }
     );
     ]]
-  elseif args.volumeUrl and args.volumeExtension then
+  elseif args.url and args.volumeUrl then
+    addResource(args.url)
+    addResource(args.volumeUrl)
     viewerFunction = [[
     viewer.loadStructureFromUrl("${url}", "${urlExtension}")
     viewer.loadVolumeFromUrl(
@@ -178,10 +200,13 @@ local function createViewer(args)
     );
     ]]
   elseif args.snapshotUrl and args.snapshotExtension then
+    addResource(args.snapshotUrl)
+    --TODO: add dependencies of the snapshot as well
     viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
   elseif args.afdb then
     viewerFunction = 'viewer.loadAlphaFoldDb(afdb="${afdb}")'
   else -- otherwise read from url (local or remote)
+    addResource(args.url)
     viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
 
