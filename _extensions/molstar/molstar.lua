@@ -131,6 +131,7 @@ local function createViewer(args)
     volumeExtension = args.volumeExtension,
     snapshotUrl = args.snapshotUrl, 
     snapshotExtension = args.snapshotExtension,
+    afdb = args.afdb,
     data = args.data,
     options = mergeMolstarOptions(args.userOptions)
   }
@@ -178,6 +179,8 @@ local function createViewer(args)
     ]]
   elseif args.snapshotUrl and args.snapshotExtension then
     viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
+  elseif args.afdb then
+    viewerFunction = 'viewer.loadAlphaFoldDb(afdb="${afdb}")'
   else -- otherwise read from url (local or remote)
     viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
@@ -200,6 +203,24 @@ return {
     return pandoc.RawBlock('html', createViewer {
       appId = appId,
       pdbId = pdbId,
+      userOptions = kwargs
+    })
+  end,
+
+  ['mol-afdb'] = function(args, kwargs)
+    -- return early if the output format is unsupported
+    if not quarto.doc.isFormat("html:js") then
+      return pandoc.Null()
+    end
+
+    addDependencies()
+
+    local afdb = pandoc.utils.stringify(args[1])
+    local appId = 'app-' .. afdb
+
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      afdb = afdb,
       userOptions = kwargs
     })
   end,
