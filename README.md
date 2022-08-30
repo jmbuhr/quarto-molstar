@@ -36,6 +36,7 @@ Likewise, the example rendered as a revealjs presentation (`presentation.qmd`) i
   For plain text formats in the `mol-url` shortcode, such as `pdb` and `xyz`, you can enable a custom option that circumvents this limitation 
   by embedding them straight into the html as a string.
   Add `molstar: embed` to your yml frontmatter to use this.
+- Resources like local structures that have to be loaded need to be added manually via <https://quarto.org/docs/reference/projects/core.html> in order to be copied to the publish directory until support for automatic resource discovery (<https://github.com/jmbuhr/quarto-molstar/issues/7>).
 - revealjs presentations now use iframes instead of a normal div to work around https://github.com/jmbuhr/quarto-molstar/issues/1,
   which is why you might have to address those differently for custom styling if you plan to use the same source for html and revealjs output.
 
