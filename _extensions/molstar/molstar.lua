@@ -84,7 +84,7 @@ end
 ---@return string
 local function wrapInlineIframe(viewerFunctionString)
   return [[
-    <iframe id="${frameId}" class="molstar-app" seamless allow="fullscreen" srcdoc='
+    <iframe id="${appId}" class="molstar-app" seamless allow="fullscreen" srcdoc='
     <html>
     <head>
     <script type="text/javascript" src="./molstar.js"></script>
