@@ -54,17 +54,13 @@ end
 ---or deployment via quarto publish gh-pages.
 ---@param path string Path to the resource
 local function addResource(path)
-  p(path)
   local m = path:match('^https?://')
+  -- location of the path relative to this lua script
+  local location = pandoc.path.join{'../..' ,path}
   if m == nil then
-    quarto.doc.addHtmlDependency{
-      name = path,
-      version = path,
-      resources = {
-        {name = path, path = path}
-      }
-    }
+    quarto.doc.attachToDependency('molstar', {name = location, path = location})
   end
+  return pandoc.path.join{'./site_libs/', path}
 end
 
 ---Merge user provided molstar options with defaults
@@ -138,6 +134,62 @@ end
 ---@param args table
 ---@return string
 local function createViewer(args)
+  local wrapper
+  local viewerFunction
+
+  if useIframes then
+    wrapper = wrapInlineIframe
+  else
+    wrapper = wrapInlineDiv
+  end
+
+  if args.data then -- if we have embedded data, use it
+    viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${urlExtension}");'
+  elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
+    viewerFunction = 'viewer.loadPdb("${pdb}");'
+  elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
+    args.url = addResource(args.url)
+    args.trajUrl = addResource(args.trajUrl)
+    viewerFunction = [[
+    viewer.loadTrajectory(
+    {
+      model: {
+        kind: "model-url", url: "${url}", format: "${urlExtension}"
+      },
+      coordinates: {
+        kind: "coordinates-url", url: "${trajUrl}",
+        format: "${trajExtension}", isBinary: true
+      }
+    }
+    );
+    ]]
+  elseif args.url and args.volumeUrl then
+    args.url = addResource(args.url)
+    args.volumeUrl = addResource(args.volumeUrl)
+    viewerFunction = [[
+    viewer.loadStructureFromUrl("${url}", "${urlExtension}")
+    viewer.loadVolumeFromUrl(
+    {url: "${volumeUrl}",
+    format: "${volumeExtension}",
+    isBinary: false},
+    [{type: "absolute",
+    alpha: 1,
+    value: 0.001, 
+      }
+      ]
+    );
+    ]]
+  elseif args.snapshotUrl and args.snapshotExtension then
+    args.snapshotUrl = addResource(args.snapshotUrl)
+    --TODO: add dependencies of the snapshot as well
+    viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
+  elseif args.afdb then
+    viewerFunction = 'viewer.loadAlphaFoldDb(afdb="${afdb}")'
+  else -- otherwise read from url (local or remote)
+    args.url = addResource(args.url)
+    viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
+  end
+
   local subs = {
     appId = args.appId,
     url = args.url,
@@ -153,62 +205,6 @@ local function createViewer(args)
     data = args.data,
     options = mergeMolstarOptions(args.userOptions)
   }
-
-  local wrapper
-  local viewerFunction
-
-  if useIframes then
-    wrapper = wrapInlineIframe
-  else
-    wrapper = wrapInlineDiv
-  end
-
-  if args.data then -- if we have embedded data, use it
-    viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${urlExtension}");'
-  elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
-    viewerFunction = 'viewer.loadPdb("${pdb}");'
-  elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
-    addResource(args.url)
-    addResource(args.trajUrl)
-    viewerFunction = [[
-    viewer.loadTrajectory(
-    {
-      model: {
-        kind: "model-url", url: "${url}", format: "${urlExtension}"
-      },
-      coordinates: {
-        kind: "coordinates-url", url: "${trajUrl}",
-        format: "${trajExtension}", isBinary: true
-      }
-    }
-    );
-    ]]
-  elseif args.url and args.volumeUrl then
-    addResource(args.url)
-    addResource(args.volumeUrl)
-    viewerFunction = [[
-    viewer.loadStructureFromUrl("${url}", "${urlExtension}")
-    viewer.loadVolumeFromUrl(
-    {url: "${volumeUrl}",
-    format: "${volumeExtension}",
-    isBinary: false},
-    [{type: "absolute",
-    alpha: 1,
-    value: 0.001, 
-      }
-      ]
-    );
-    ]]
-  elseif args.snapshotUrl and args.snapshotExtension then
-    addResource(args.snapshotUrl)
-    --TODO: add dependencies of the snapshot as well
-    viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
-  elseif args.afdb then
-    viewerFunction = 'viewer.loadAlphaFoldDb(afdb="${afdb}")'
-  else -- otherwise read from url (local or remote)
-    addResource(args.url)
-    viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
-  end
 
   return f(wrapper(viewerFunction), subs)
 end
