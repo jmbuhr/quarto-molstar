@@ -1,5 +1,7 @@
 -- for development:
-local p = quarto.utils.dump
+local p = function (x)
+  quarto.log.output(x)
+end
 
 ---@type boolean
 local useIframes = false
@@ -129,7 +131,7 @@ local function createViewer(args)
     trajExtension = args.trajExtension,
     volumeUrl = args.volumeUrl,
     volumeExtension = args.volumeExtension,
-    snapshotUrl = args.snapshotUrl, 
+    snapshotUrl = args.snapshotUrl,
     snapshotExtension = args.snapshotExtension,
     afdb = args.afdb,
     data = args.data,
@@ -235,8 +237,10 @@ return {
     local url = pandoc.utils.stringify(args[1])
     local appId = 'app-' .. url
     local urlExtension = fileExt(url)
-
-    local molstarMeta = pandoc.utils.stringify(meta['molstar'])
+    local molstarMeta = ''
+    if meta.molstar then
+      molstarMeta = pandoc.utils.stringify(meta.molstar)
+    end
     local pdbContent
     if molstarMeta == 'embed' and not useIframes then
       ---@type string|nil
