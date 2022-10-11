@@ -66,7 +66,7 @@ local function addResource(path)
     -- location of the path relative to this lua script
     local location = pandoc.path.join{'../..' ,path}
     if m == nil then
-      quarto.doc.attachToDependency('molstar', location)
+      quarto.doc.attachToDependency('molstar', {name = location, path = location})
     end
     return pandoc.path.join{'./site_libs/', path}
   end
