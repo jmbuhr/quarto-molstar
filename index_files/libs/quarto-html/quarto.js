@@ -275,7 +275,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
         const convertToMenu = () => {
           for (const child of el.children) {
             child.style.opacity = 0;
-            child.style.display = "none";
+            child.style.overflow = "hidden";
           }
 
           const toggleContainer = window.document.createElement("div");
@@ -378,7 +378,7 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
         const convertToSidebar = () => {
           for (const child of el.children) {
             child.style.opacity = 1;
-            child.style.display = null;
+            child.style.overflow = null;
           }
 
           const placeholderEl = window.document.getElementById(
@@ -420,18 +420,21 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
   const marginChildren = window.document.querySelectorAll(
     ".column-margin.column-container > * "
   );
-  let lastBottom = 0;
-  for (const marginChild of marginChildren) {
-    const top = marginChild.getBoundingClientRect().top;
-    if (top < lastBottom) {
-      const margin = lastBottom - top;
-      marginChild.style.marginTop = `${margin}px`;
-    }
-    const styles = window.getComputedStyle(marginChild);
-    const marginTop = parseFloat(styles["marginTop"]);
 
-    lastBottom = top + marginChild.getBoundingClientRect().height + marginTop;
-  }
+  nexttick(() => {
+    let lastBottom = 0;
+    for (const marginChild of marginChildren) {
+      const top = marginChild.getBoundingClientRect().top;
+      if (top < lastBottom) {
+        const margin = lastBottom - top;
+        marginChild.style.marginTop = `${margin}px`;
+      }
+      const styles = window.getComputedStyle(marginChild);
+      const marginTop = parseFloat(styles["marginTop"]);
+
+      lastBottom = top + marginChild.getBoundingClientRect().height + marginTop;
+    }
+  });
 
   // Manage the visibility of the toc and the sidebar
   const marginScrollVisibility = manageSidebarVisiblity(marginSidebarEl, {
@@ -757,4 +760,8 @@ function throttle(func, wait) {
       }, wait);
     }
   };
+}
+
+function nexttick(func) {
+  return setTimeout(func, 0);
 }

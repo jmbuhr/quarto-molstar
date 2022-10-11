@@ -3,7 +3,6 @@ title: Molstar example
 format:
   revealjs:
     css: presentation.css
-molstar: embed
 ---
 
 ## RCSB PDB
