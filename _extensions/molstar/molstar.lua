@@ -56,20 +56,17 @@ end
 ---or deployment via quarto publish gh-pages.
 ---@param path string Path to the resource
 local function addResource(path)
+  local m = path:match('^https?://')
   local isProject = quarto.doc.project_output_file()
-  if isProject == nil then
+  if isProject == nil or m ~= nil then
     -- for single documents
     return path
-  else
-    -- for sites
-    local m = path:match('^https?://')
-    -- location of the path relative to this lua script
-    local location = pandoc.path.join{'../..' ,path}
-    if m == nil then
-      quarto.doc.attachToDependency('molstar', {name = location, path = location})
-    end
-    return pandoc.path.join{'./site_libs/', path}
   end
+  -- for sites
+  -- location of the path relative to this lua script
+  local location = pandoc.path.join{'../..' ,path}
+  quarto.doc.attachToDependency('molstar', {name = location, path = location})
+  return pandoc.path.join{'./site_libs/', path}
 end
 
 ---Merge user provided molstar options with defaults
