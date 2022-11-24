@@ -1,6 +1,8 @@
 ---
 title: Molstar example
-format: html
+format:
+  html:
+    code-copy: true
 toc: true
 # molstar: embed
 ---
@@ -123,3 +125,43 @@ For example, you might want to make one app a bit shorter because there is text 
   padding-bottom: 40%;
 }
 ```
+
+# Presentations
+
+`quarto-molstar` also works with presentations, but there are some caveats.
+Here is an example: [presentation](presentation.html).
+
+Instead of `div`s, quarto-molstar creates in-line `iframe`s for presentations,
+because `divs`s with molstar content in them only appear black in revealjs.
+However, iframes can sometimes interact not very nicely with the scaling used by revealjs, so they can appear blurry.
+There is a way to make iframes that are not affected by the scaling and blurring and that is by using a [background iframe](https://quarto.org/docs/presentations/revealjs/#iframe-backgrounds), but this requires a separate file and is a bit more manual.
+Here is how you would include an example file `_example.html` an iframe:
+
+```html
+<head>
+<script type="text/javascript" src="./molstar.js"></script>
+<link rel="stylesheet" type="text/css" href="./molstar.css"/>
+</head>
+<body>
+<div id="app-id" class="molstar-app"></div>
+<script type="text/javascript">
+molstar.Viewer.create("app-id", {"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowRemoteState":false,"viewportShowAnimation":true,"pdbProvider":"rcsb","layoutShowSequence":false,"viewportShowSelectionMode":false,"layoutShowLog":false,"viewportShowExpand":true,"layoutShowControls":false,"layoutIsExpanded":false}).then(viewer => {
+viewer.loadStructureFromUrl("./www/traj.xyz", "xyz")
+});
+</script>
+</body>
+
+<style>
+.molstar-app {
+  width: 100%;
+  height: 800px;
+}
+</style>
+```
+
+And then in `qmd`:
+
+```markdown
+## Heading {background-iframe="./_example.html" background-interactive=true}
+```
+
