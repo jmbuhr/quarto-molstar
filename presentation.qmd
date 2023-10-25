@@ -47,3 +47,9 @@ Load a topology and a trajectory with:
 
 {{< mol-traj ./www/example.pdb ./www/example.xtc >}}
 
+## local pdb with higher resolution
+
+`{{{< mol-url ./www/7sgl.pdb pixelScale=3 >}}}`
+
+{{< mol-url ./www/7sgl.pdb pixelScale=3 >}}
+
