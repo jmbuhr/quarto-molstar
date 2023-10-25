@@ -165,3 +165,9 @@ And then in `qmd`:
 ## Heading {background-iframe="./_example.html" background-interactive=true}
 ```
 
+Alternatively the `pixelScale` parameter can be used to upscale the resolution of the rendering in presentations
+and readjust for the 'downsampling' of `reveal.js`.
+```markdown
+{< mol-url ./www/7sgl.pdb pixelScale=3 >}
+```
+
