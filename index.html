@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -92,6 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#local-pdb-and-trajectory" id="toc-local-pdb-and-trajectory" class="nav-link" data-scroll-target="#local-pdb-and-trajectory">local pdb and trajectory</a></li>
   <li><a href="#snapshot-file" id="toc-snapshot-file" class="nav-link" data-scroll-target="#snapshot-file">snapshot file</a></li>
   <li><a href="#local-file-with-volume-information" id="toc-local-file-with-volume-information" class="nav-link" data-scroll-target="#local-file-with-volume-information">local file with volume information</a></li>
+  <li><a href="#local-mvsj-file" id="toc-local-mvsj-file" class="nav-link" data-scroll-target="#local-mvsj-file">local MVSJ file</a></li>
   <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a>
   <ul class="collapse">
   <li><a href="#molstar-options" id="toc-molstar-options" class="nav-link" data-scroll-target="#molstar-options">Molstar options</a></li>
@@ -120,7 +121,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="usage-examples-for" class="level1">
 <h1>Usage examples for</h1>
@@ -131,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-rcsb 7sgl &gt;}}</code></p>
     <div id="app-7sgl" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7sgl", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-7sgl", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadPdb("7sgl");    });
     </script>
     
@@ -142,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-afdb Q8W3K0 &gt;}}</code></p>
     <div id="app-Q8W3K0" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-Q8W3K0", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-Q8W3K0", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadAlphaFoldDb(afdb="Q8W3K0")    });
     </script>
     
@@ -153,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-url ./www/7sgl.pdb &gt;}}</code></p>
     <div id="app-./www/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/7sgl.pdb", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/7sgl.pdb", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadStructureFromUrl("./www/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -164,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-url https://files.rcsb.org/download/7sgl.pdb &gt;}}</code></p>
     <div id="app-https://files.rcsb.org/download/7sgl.pdb" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-https://files.rcsb.org/download/7sgl.pdb", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadStructureFromUrl("https://files.rcsb.org/download/7sgl.pdb", format="pdb");    });
     </script>
     
@@ -172,21 +175,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="local-xyz-file" class="level2">
 <h2 class="anchored" data-anchor-id="local-xyz-file">local xyz file</h2>
 <p>Get a local xyz file with:</p>
-<p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
-    <div id="app-./www/example.xyz" class="molstar-app"></div>
-    <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.xyz", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
-    viewer.loadStructureFromUrl("./www/example.xyz", format="xyz");    });
-    </script>
-    
+<p><code>[]{.quarto-shortcode__-escaped data-is-shortcode="1" data-value=" }</code></p>
+<p>{{&lt; mol-url ./www/example.xyz &gt;}}</p>
 </section>
 <section id="local-pdb-and-trajectory" class="level2">
 <h2 class="anchored" data-anchor-id="local-pdb-and-trajectory">local pdb and trajectory</h2>
 <p>Load a topology and a trajectory with:</p>
-<p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
+<p><code>{{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}"}</code></p>
     <div id="app-./www/example.pdb./www/example.xtc" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/example.pdb./www/example.xtc", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
         viewer.loadTrajectory(
     {
       model: {
@@ -208,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-snapshot ./www/molstar.molj &gt;}}</code></p>
     <div id="app-./www/molstar.molj" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/molstar.molj", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/molstar.molj", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadSnapshotFromUrl(url="./www/molstar.molj", "molj");    });
     </script>
     
@@ -218,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-volume ./www/traj.xyz ./www/density.cube &gt;}}</code></p>
     <div id="app-./www/traj.xyz./www/density.cube" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":true,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-./www/traj.xyz./www/density.cube", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
         viewer.loadStructureFromUrl("./www/traj.xyz", "xyz")
     viewer.loadVolumeFromUrl(
     {url: "./www/density.cube",
@@ -226,11 +224,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     isBinary: false},
     [{type: "absolute",
     alpha: 1,
-    value: 0.001, 
+    value: 0.001,
       }
       ]
     );
         });
+    </script>
+    
+</section>
+<section id="local-mvsj-file" class="level2">
+<h2 class="anchored" data-anchor-id="local-mvsj-file">local MVSJ file</h2>
+<p><code>{{&lt; mol-json ./www/1cbs.mvsj &gt;}}</code></p>
+    <div id="app-./www/1cbs.mvsj" class="molstar-app"></div>
+    <script type="text/javascript">
+    molstar.Viewer.create("app-./www/1cbs.mvsj", {"pdbProvider":"rcsb","viewportShowAnimation":true,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
+    viewer.loadMvsFromUrl(url="./www/1cbs.mvsj", "mvsj");    });
     </script>
     
 </section>
@@ -245,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; mol-rcsb 7eqr viewportShowAnimation=false &gt;}}</code></p>
     <div id="app-7eqr" class="molstar-app"></div>
     <script type="text/javascript">
-    molstar.Viewer.create("app-7eqr", {"layoutShowLeftPanel":true,"layoutShowControls":false,"viewportShowAnimation":false,"layoutShowSequence":false,"layoutShowLog":false,"layoutIsExpanded":false,"emdbProvider":"rcsb","pdbProvider":"rcsb","layoutShowRemoteState":false,"viewportShowExpand":true,"viewportShowSelectionMode":false}).then(viewer => {
+    molstar.Viewer.create("app-7eqr", {"pdbProvider":"rcsb","viewportShowAnimation":false,"emdbProvider":"rcsb","layoutShowLeftPanel":true,"layoutShowSequence":false,"viewportShowExpand":true,"layoutShowRemoteState":false,"layoutShowControls":false,"layoutShowLog":false,"layoutIsExpanded":false,"viewportShowSelectionMode":false}).then(viewer => {
     viewer.loadPdb("7eqr");    });
     </script>
     
@@ -261,13 +269,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Each embedded app is inserted into a div with an ID created from the path of the pdb-file or trajectory (please don’t embed the same thing twice, it will only show up once). So the first app on this page will respond to css for <code>#app-7sgl</code>.</p>
 <p>All apps have the class <code>molstar-app</code> and the following css is included by default:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.molstar-app</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-bottom</span>: <span class="dv">56.25</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">relative</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-bottom</span><span class="ch">:</span> <span class="dv">56.25</span><span class="dt">%</span><span class="op">;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For example, you might want to make one app a bit shorter because there is text above it:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#app-7sgl</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-bottom</span>: <span class="dv">40</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-bottom</span><span class="ch">:</span> <span class="dv">40</span><span class="dt">%</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
@@ -276,25 +284,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Presentations</h1>
 <p><code>quarto-molstar</code> also works with presentations, but there are some caveats. Here is an example: <a href="presentation.html">presentation</a>.</p>
 <p>Instead of <code>div</code>s, quarto-molstar creates in-line <code>iframe</code>s for presentations, because <code>divs</code>s with molstar content in them only appear black in revealjs. However, iframes can sometimes interact not very nicely with the scaling used by revealjs, so they can appear blurry. There is a way to make iframes that are not affected by the scaling and blurring and that is by using a <a href="https://quarto.org/docs/presentations/revealjs/#iframe-backgrounds">background iframe</a>, but this requires a separate file and is a bit more manual. Here is how you would include an example file <code>_example.html</code> an iframe:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;head&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">"text/javascript"</span> <span class="er">src</span><span class="ot">=</span><span class="st">"./molstar.js"</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"./molstar.css"</span><span class="kw">/&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/head&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span><span class="ot">=</span><span class="st">"app-id"</span> <span class="er">class</span><span class="ot">=</span><span class="st">"molstar-app"</span><span class="kw">&gt;&lt;/div&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">"text/javascript"</span><span class="kw">&gt;</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"text/javascript"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"./molstar.js"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text/css"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"./molstar.css"</span><span class="dt">/&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"app-id"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"molstar-app"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">"text/javascript"</span><span class="dt">&gt;</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>molstar<span class="op">.</span><span class="at">Viewer</span><span class="op">.</span><span class="fu">create</span>(<span class="st">"app-id"</span><span class="op">,</span> {<span class="st">"emdbProvider"</span><span class="op">:</span><span class="st">"rcsb"</span><span class="op">,</span><span class="st">"layoutShowLeftPanel"</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span><span class="st">"layoutShowRemoteState"</span><span class="op">:</span><span class="kw">false</span><span class="op">,</span><span class="st">"viewportShowAnimation"</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span><span class="st">"pdbProvider"</span><span class="op">:</span><span class="st">"rcsb"</span><span class="op">,</span><span class="st">"layoutShowSequence"</span><span class="op">:</span><span class="kw">false</span><span class="op">,</span><span class="st">"viewportShowSelectionMode"</span><span class="op">:</span><span class="kw">false</span><span class="op">,</span><span class="st">"layoutShowLog"</span><span class="op">:</span><span class="kw">false</span><span class="op">,</span><span class="st">"viewportShowExpand"</span><span class="op">:</span><span class="kw">true</span><span class="op">,</span><span class="st">"layoutShowControls"</span><span class="op">:</span><span class="kw">false</span><span class="op">,</span><span class="st">"layoutIsExpanded"</span><span class="op">:</span><span class="kw">false</span>})<span class="op">.</span><span class="fu">then</span>(viewer <span class="kw">=&gt;</span> {</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>viewer<span class="op">.</span><span class="fu">loadStructureFromUrl</span>(<span class="st">"./www/traj.xyz"</span><span class="op">,</span> <span class="st">"xyz"</span>)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;style&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">style</span><span class="dt">&gt;</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">.molstar-app</span> {</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span>: <span class="dv">800</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span><span class="ch">:</span> <span class="dv">800</span><span class="dt">px</span><span class="op">;</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/style&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">style</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And then in <code>qmd</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heading {background-iframe="./_example.html" background-interactive=true}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Alternatively, the <code>pixelScale</code> parameter can be used to upscale the resolution of the rendering in presentations and readjust for the ‘downsampling’ of <code>reveal.js</code>.</p>
@@ -338,18 +346,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -381,11 +378,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -395,8 +431,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -408,7 +453,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -452,6 +620,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -477,6 +646,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -537,6 +732,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
