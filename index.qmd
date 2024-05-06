@@ -73,6 +73,14 @@ Load a snapshot file, to share a saved Mol\* session which will save aesthetic p
 
 {{< mol-volume ./www/traj.xyz ./www/density.cube >}}
 
+
+## local MVSJ file
+
+`{{{< mol-json ./www/1cbs.mvsj >}}}`
+
+{{< mol-json ./www/1cbs.mvsj >}}
+
+
 ## Customization
 
 ### Molstar options

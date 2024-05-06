@@ -1,5 +1,5 @@
 -- for development:
-local p = function (x)
+local p = function(x)
   quarto.log.output(x)
 end
 
@@ -147,9 +147,9 @@ local function createViewer(args)
     wrapper = wrapInlineDiv
   end
 
-  if args.data then -- if we have embedded data, use it
+  if args.data then                     -- if we have embedded data, use it
     viewerFunction = 'viewer.loadStructureFromData(`${data}`, format="${urlExtension}");'
-  elseif args.pdbId then -- fetch from rcsb pdbb if an ID is given
+  elseif args.pdbId then                -- fetch from rcsb pdbb if an ID is given
     viewerFunction = 'viewer.loadPdb("${pdb}");'
   elseif args.url and args.trajUrl then -- load topology + trajectory if both are given
     viewerFunction = [[
@@ -174,7 +174,7 @@ local function createViewer(args)
     isBinary: false},
     [{type: "absolute",
     alpha: 1,
-    value: 0.001, 
+    value: 0.001,
       }
       ]
     );
@@ -183,6 +183,8 @@ local function createViewer(args)
     viewerFunction = 'viewer.loadSnapshotFromUrl(url="${snapshotUrl}", "${snapshotExtension}");'
   elseif args.afdb then
     viewerFunction = 'viewer.loadAlphaFoldDb(afdb="${afdb}")'
+  elseif args.urlExtension == 'mvsj' then
+    viewerFunction = 'viewer.loadMvsFromUrl(url="${url}", "${urlExtension}");'
   else -- otherwise read from url (local or remote)
     viewerFunction = 'viewer.loadStructureFromUrl("${url}", format="${urlExtension}");'
   end
@@ -254,7 +256,7 @@ return {
       userOptions = kwargs
     })
   end,
-  
+
   ['mol-snapshot'] = function(args, kwargs, meta)
     if not quarto.doc.isFormat("html:js") then
       return pandoc.Null()
@@ -313,6 +315,25 @@ return {
       volumeExtension = fileExt(volumeUrl),
       userOptions = kwargs
     })
+  end,
+
+  ['mol-json'] = function(args, kwargs)
+    if not quarto.doc.isFormat("html:js") then
+      return pandoc.Null()
+    end
+
+    addDependencies()
+
+    local url = pandoc.utils.stringify(args[1])
+    local appId = 'app-' .. url
+
+    return pandoc.RawBlock('html', createViewer {
+      appId = appId,
+      url = url,
+      urlExtension = fileExt(url),
+      userOptions = kwargs
+    }
+    )
   end,
 
 }
