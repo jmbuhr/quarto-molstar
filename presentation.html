@@ -11,7 +11,7 @@
 <script src="presentation_files/libs/quarto-contrib/molstar-v3.13.0/molstar.js"></script>
 <link href="presentation_files/libs/quarto-contrib/molstar-v3.13.0/molstar.css" rel="stylesheet">
 <link href="presentation_files/libs/quarto-contrib/molstar-v3.13.0/app-container.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.550">
 
   <title>Molstar example</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -159,7 +159,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -347,7 +348,7 @@
     <body>
     <div id=&quot;app-7sgl&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-7sgl&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-7sgl&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false}).then(viewer => {
     viewer.loadPdb(&quot;7sgl&quot;);    });
     </script>
     </body>
@@ -369,7 +370,7 @@
     <body>
     <div id=&quot;app-./www/7sgl.pdb&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;./www/7sgl.pdb&quot;, format=&quot;pdb&quot;);    });
     </script>
     </body>
@@ -391,7 +392,7 @@
     <body>
     <div id=&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-https://files.rcsb.org/download/7sgl.pdb&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;https://files.rcsb.org/download/7sgl.pdb&quot;, format=&quot;pdb&quot;);    });
     </script>
     </body>
@@ -403,29 +404,13 @@
 <section id="local-xyz-file" class="slide level2">
 <h2>local xyz file</h2>
 <p>Get a local xyz file with:</p>
-<p><code>{{&lt; mol-url ./www/example.xyz &gt;} }</code></p>
-    <iframe id="app-./www/example.xyz" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
-    <html>
-    <head>
-    <script type=&quot;text/javascript&quot; src=&quot;./molstar.js&quot;></script>
-    <link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./molstar.css&quot;/>
-    </head>
-    <body>
-    <div id=&quot;app-./www/example.xyz&quot; class=&quot;molstar-app&quot;></div>
-    <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./www/example.xyz&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
-    viewer.loadStructureFromUrl(&quot;./www/example.xyz&quot;, format=&quot;xyz&quot;);    });
-    </script>
-    </body>
-    </html>
-    ">
-    </iframe>
-    
+<p><code>[]{.quarto-shortcode__-escaped data-is-shortcode="1" data-value=" }</code></p>
+<p>{{&lt; mol-url ./www/example.xyz &gt;}}</p>
 </section>
 <section id="local-pdb-and-trajectory" class="slide level2">
 <h2>local pdb and trajectory</h2>
 <p>Load a topology and a trajectory with:</p>
-<p><code>{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}</code></p>
+<p><code>{{{&lt; mol-traj ./www/example.pdb ./www/example.xtc &gt;}}"}</code></p>
     <iframe id="app-./www/example.pdb./www/example.xtc" class="molstar-app" seamless="" allow="fullscreen" srcdoc="
     <html>
     <head>
@@ -435,7 +420,7 @@
     <body>
     <div id=&quot;app-./www/example.pdb./www/example.xtc&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./www/example.pdb./www/example.xtc&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./www/example.pdb./www/example.xtc&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowControls&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false}).then(viewer => {
         viewer.loadTrajectory(
     {
       model: {
@@ -467,7 +452,7 @@
     <body>
     <div id=&quot;app-./www/7sgl.pdb&quot; class=&quot;molstar-app&quot;></div>
     <script type=&quot;text/javascript&quot;>
-    molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;viewportShowAnimation&quot;:true,&quot;layoutShowControls&quot;:false,&quot;layoutShowLog&quot;:false,&quot;layoutShowLeftPanel&quot;:true,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowSelectionMode&quot;:false,&quot;pixelScale&quot;:&quot;3&quot;,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowRemoteState&quot;:false,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;layoutShowSequence&quot;:false,&quot;viewportShowExpand&quot;:true}).then(viewer => {
+    molstar.Viewer.create(&quot;app-./www/7sgl.pdb&quot;, {&quot;layoutShowLog&quot;:false,&quot;layoutIsExpanded&quot;:false,&quot;layoutShowControls&quot;:false,&quot;pixelScale&quot;:&quot;3&quot;,&quot;emdbProvider&quot;:&quot;rcsb&quot;,&quot;pdbProvider&quot;:&quot;rcsb&quot;,&quot;viewportShowAnimation&quot;:true,&quot;layoutShowRemoteState&quot;:false,&quot;viewportShowExpand&quot;:true,&quot;layoutShowLeftPanel&quot;:true,&quot;layoutShowSequence&quot;:false,&quot;viewportShowSelectionMode&quot;:false}).then(viewer => {
     viewer.loadStructureFromUrl(&quot;./www/7sgl.pdb&quot;, format=&quot;pdb&quot;);    });
     </script>
     </body>
@@ -475,8 +460,10 @@
     ">
     </iframe>
     
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -505,7 +492,6 @@
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -766,10 +752,9 @@
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -779,8 +764,17 @@
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

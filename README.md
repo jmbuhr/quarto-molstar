@@ -45,8 +45,11 @@ Likewise, the example rendered as a revealjs presentation (`presentation.qmd`) i
 The js and css files where downloaded from the [molstar web viewer](https://molstar.org/viewer/) in order to be up to date but also self-contained and functional without an internet connection. 
 
 ```bash
-wget https://molstar.org/viewer/molstar.js
-wget https://molstar.org/viewer/molstar.css
+cd _extensions/molstar/assets
+rm molstar.js
+wget https://cdn.jsdelivr.net/npm/molstar@latest/build/viewer/molstar.js
+rm molstar.css
+wget https://cdn.jsdelivr.net/npm/molstar@latest/build/viewer/molstar.css
 ```
 
 
